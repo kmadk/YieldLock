@@ -27,7 +27,7 @@ async function main () {
     let totalGasCost = ethers.utils.parseEther('0');
 
     // Retrieve contract artifacts and deploy them.
-    const yieldLockFactory = await ethers.getContractFactory('Miladys');
+    const yieldLockFactory = await ethers.getContractFactory('YieldLock');
 
     // Deploy the item collection.
     console.log(` -> Deploying the item collection ...`);

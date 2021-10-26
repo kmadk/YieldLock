@@ -52,9 +52,11 @@ contract YieldLock is BaseRelayRecipient, IYieldLock {
         require(duration >= 0, "duration must be greater than or equal to 0");
 
         // if token is ERC20, transfer funds to this contract
-        if (tokenAddress != address(0)) {
-        // transfers ERC20 token to this contract to lock
-        require(IERC20(tokenAddress).transferFrom(_msgSender(), address(this), amount), "transfer failed");
+        if (tokenAddress == address(0)) {
+            require(amount == msg.value, "amount must equal msg.value");
+        } else {
+            // transfers ERC20 token to this contract to lock
+            require(IERC20(tokenAddress).transferFrom(_msgSender(), address(this), amount), "transfer failed");
         }
 
         // adds deposit information to relevant redeemableBalances mappings
